@@ -1,0 +1,158 @@
+/* Fondo y fuente general */
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f8;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+/* Encabezado especial para asistencias */
+.header_asist {
+    width: 100%;
+    max-width: 430px;
+    background: #004080;
+    color: #fff;
+    padding: 24px 0 18px 0;
+    text-align: center;
+    border-radius: 12px 12px 0 0;
+    margin: 32px auto 0 auto;
+    position: relative;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+}
+
+.header_asist h1 {
+    margin: 0;
+    font-size: 2rem;
+    letter-spacing: 1px;
+}
+
+.back_button {
+    position: absolute;
+    left: 24px;
+    top: 24px;
+}
+
+.back_button a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Formulario de asistencias en una columna */
+.form_asist {
+    max-width: 430px;
+    width: 100%;
+    margin: 0 auto 32px auto;
+    background: #fff;
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+/* Fieldsets ocupan todo el ancho */
+.form_camp {
+    width: 100%;
+    margin-bottom: 22px;
+    border: none;
+    padding: 0;
+}
+
+/* Inputs y selects al 100% */
+input[type="text"], input[type="datetime-local"], input[type="number"], input[type="date"], input[type="time"], select,
+.camp_text, .select_camp {
+    width: 100%;
+    padding: 12px 14px;
+    margin: 10px 0 18px 0;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: #f9f9f9;
+    transition: border-color 0.2s;
+    color: #222;
+    box-sizing: border-box;
+}
+
+input:focus, select:focus, .camp_text:focus, .select_camp:focus {
+    border-color: #0056b3;
+    outline: none;
+    background: #fff;
+}
+
+/* Botones */
+button, .submit_button {
+    width: 100%;
+    padding: 14px 0;
+    background: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 17px;
+    font-weight: 500;
+    margin-top: 6px;
+    margin-bottom: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.04);
+    transition: background 0.25s, transform 0.2s;
+    cursor: pointer;
+}
+
+button:hover, .submit_button:hover {
+    background: #2980b9;
+    transform: scale(1.03);
+}
+
+/* Etiquetas y textos */
+label, .camp_info, p {
+    color: #444;
+    font-size: 15px;
+    text-align: left;
+    display: block;
+    margin-bottom: 4px;
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+/* Tablas responsivas */
+.table_form {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 12px;
+}
+
+/* Mensajes */
+.error_message {
+    color: red;
+    font-size: 14px;
+    margin-top: -15px;
+    margin-bottom: 15px;
+}
+
+.success_message {
+    color: green;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .header_asist, .form_asist {
+        max-width: 98vw;
+        padding-left: 2vw;
+        padding-right: 2vw;
+    }
+    .header_asist h1 {
+        font-size: 1.3rem;
+    }
+}
