@@ -1,5 +1,5 @@
 // URL base de la API
-const API_URL = "https://sistemadeasistencia.netlify.app/.netlify/functions/estudiantes";
+const API_URL = "https://gestionuniversidad.netlify.app/.netlify/functions/estudiantes";
 
 // Registrar Estudiante
 function registrarEstudiante(event) {
@@ -157,3 +157,4 @@ function agregarEstudianteAsignatura(event) {
         alert(error.message);
     });
 }
+// Eliminar Estudiante de Asignatura
