@@ -1,2 +1,2 @@
 [build]
-    functions = "Netlify/functions"
+    functions = "netlify/functions" 

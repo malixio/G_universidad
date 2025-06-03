@@ -1,5 +1,5 @@
 // URL base de la API
-const API_URL = "https://gestionuniversidad.netlify.app/.netlify/functions/estudiantes";
+const API_URL = "/.netlify/functions/estudiantes";  // Quitar el dominio completo
 
 // Registrar Estudiante
 function registrarEstudiante(event) {

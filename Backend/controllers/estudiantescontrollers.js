@@ -1,75 +1,52 @@
-// Datos quemados de estudiantes
-const estudiantes = [
-    {
-        tipoDocumento: "CC",
-        numeroDocumento: "12345678",
-        nombre: "Juan Pérez",
-        email: "juan@example.com",
-        departamento: "Matemáticas"
-    },
-    {
-        tipoDocumento: "TI",
-        numeroDocumento: "98765432",
-        nombre: "María García",
-        email: "maria@example.com",
-        departamento: "Ingeniería"
-    }
-];
+const { db } = require('../../firebase-config');
 
-// Consultar estudiante
 exports.consultar = async (req, res) => {
     try {
         const { tipoDoc, numDoc } = req.query;
         
-        // Respuesta quemada para consulta sin parámetros
         if (!tipoDoc || !numDoc) {
-            return res.json(estudiantes); // Devuelve todos los estudiantes
+            const snapshot = await db.collection('estudiantes').get();
+            const estudiantes = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            return res.json(estudiantes);
         }
         
-        // Buscar estudiante específico (simulado)
-        const estudiante = estudiantes.find(e => 
-            e.tipoDocumento === tipoDoc && e.numeroDocumento === numDoc
-        );
-        
-        // Respuesta quemada si no encuentra
-        if (!estudiante) {
-            return res.json({ 
-                tipoDocumento: tipoDoc,
-                numeroDocumento: numDoc,
-                nombre: "Estudiante de Ejemplo",
-                email: "ejemplo@universidad.edu",
-                departamento: "Ciencias"
-            });
+        const query = await db.collection('estudiantes')
+            .where('tipoDocumento', '==', tipoDoc)
+            .where('numeroDocumento', '==', numDoc)
+            .get();
+            
+        if (query.empty) {
+            return res.status(404).json({ error: 'Estudiante no encontrado' });
         }
         
-        res.json(estudiante);
+        res.json({
+            id: query.docs[0].id,
+            ...query.docs[0].data()
+        });
     } catch (error) {
-        res.status(500).json({ error: "Error en el servidor (simulado)" });
+        res.status(500).json({ error: error.message });
     }
 };
 
-// Ingresar nuevo estudiante (simulado)
 exports.ingresar = async (req, res) => {
     try {
-        // Respuesta quemada de éxito
-        res.status(200).json({ 
+        const { nombre, tipoDocumento, numeroDocumento } = req.body;
+        
+        const docRef = await db.collection('estudiantes').add({
+            nombre,
+            tipoDocumento,
+            numeroDocumento,
+            fechaRegistro: admin.firestore.FieldValue.serverTimestamp()
+        });
+        
+        res.status(201).json({ 
             mensaje: "Estudiante registrado exitosamente",
-            datos: req.body
+            id: docRef.id
         });
     } catch (error) {
-        res.status(400).json({ error: "Datos inválidos (simulado)" });
-    }
-};
-
-// Modificar estudiante (simulado)
-exports.modificar = async (req, res) => {
-    try {
-        // Respuesta quemada de éxito
-        res.status(200).json({ 
-            mensaje: "Estudiante modificado exitosamente",
-            cambios: req.body
-        });
-    } catch (error) {
-        res.status(400).json({ error: "Error al modificar (simulado)" });
+        res.status(400).json({ error: error.message });
     }
 };
